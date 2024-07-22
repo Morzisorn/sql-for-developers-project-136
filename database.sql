@@ -101,3 +101,22 @@ CREATE TABLE Certificates (
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
+
+CREATE TABLE Quizzes (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR(255),
+    content TEXT,
+    lesson_id BIGINT REFERENCES Lessons(id),
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+);
+
+CREATE TABLE Exercises (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    lesson_id BIGINT REFERENCES Lessons(id),
+    url VARCHAR(255),
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+);
+
+
