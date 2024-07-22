@@ -60,3 +60,44 @@ CREATE TABLE Users (
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
+
+CREATE TYPE payment_status AS ENUM ('pending', 'paid', 'failed', 'refunded');
+
+CREATE TABLE Enrollments (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    user_id BIGINT REFERENCES Users(id),
+    program_id BIGINT REFERENCES Programs(id),
+    status payment_status,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+);
+
+CREATE TABLE Payments (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    price INT,
+    status payment_status,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+);
+
+CREATE TYPE completion_status AS ENUM ('active', 'completed', 'pending', 'cancelled');
+CREATE TABLE ProgramCompletions (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    user_id BIGINT REFERENCES Users(id),
+    program_id BIGINT REFERENCES Programs(id),
+    status completion_status,
+    start_date TIMESTAMP,
+    finish_date TIMESTAMP,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+);
+
+CREATE TABLE Certificates (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    user_id BIGINT REFERENCES Users(id),
+    program_id BIGINT REFERENCES Programs(id),
+    url VARCHAR(255),
+    certificate_date TIMESTAMP,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+);
