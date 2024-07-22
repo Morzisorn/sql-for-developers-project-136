@@ -119,4 +119,23 @@ CREATE TABLE Exercises (
     updated_at TIMESTAMP
 );
 
+CREATE TABLE Discussions (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    lesson_id BIGINT REFERENCES Lessons(id),
+    comment TEXT,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+);
+
+CREATE TYPE article_status AS ENUM ('created', 'in moderation', 'published', 'archived');
+CREATE TABLE Blog (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    user_id BIGINT REFERENCES Users(id),
+    title VARCHAR(255),
+    content TEXT,
+    status article_status,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+
+);
 
