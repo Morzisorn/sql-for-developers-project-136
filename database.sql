@@ -42,3 +42,21 @@ CREATE TABLE Lessons (
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
+
+CREATE TABLE TeachingGroups (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    slag VARCHAR(255),
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+);
+
+CREATE TABLE Users (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    teachingGroup_id BIGINT REFERENCES TeachingGroups(id),
+    name VARCHAR(255),
+    email VARCHAR(255),
+    password_hash VARCHAR(255),
+    role VARCHAR(255),
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+);
