@@ -16,6 +16,11 @@ CREATE TABLE Modules (
     program_id BIGINT NOT NULL REFERENCES Programs(id)
 );
 
+CREATE TABLE ProgramModules (
+    PRIMARY KEY (program_id, module_id),
+    program_id BIGINT NOT NULL REFERENCES Programs(id),
+    module_id BIGINT NOT NULL REFERENCES Modules(id)
+);
 
 CREATE TABLE Courses (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -25,8 +30,8 @@ CREATE TABLE Courses (
     updated_at TIMESTAMP
 );
 
-CREATE TABLE Modules_Courses (
-    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+CREATE TABLE CourseModules (
+    PRIMARY KEY (course_id, module_id),
     module_id BIGINT NOT NULL REFERENCES Modules(id),
     course_id BIGINT NOT NULL REFERENCES Courses(id)
 );
