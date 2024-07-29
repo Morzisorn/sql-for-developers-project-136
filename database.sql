@@ -26,6 +26,7 @@ CREATE TABLE Courses (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
+    is_deleted BOOLEAN,
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
